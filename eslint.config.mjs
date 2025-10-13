@@ -9,6 +9,7 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
+// ESLint configuration for a Next.js project using modern module syntax
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals"),
   {

@@ -1,103 +1,134 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+// Landing page for the AI Resume Builder application
+
+// import ClearResumeButton from "@/components/ui/clearResumeButton";
+import ClearResumeButton from "@/components/ui/clearResumeButton";
+import {
+  ArrowRight,
+  CheckCircle,
+  Sparkles,
+  Download,
+  Printer,
+  Share2,
+} from "lucide-react";
+
+export default function LandingPage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="relative min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      {/* Hero Section */}
+      <div
+        className="relative w-full h-[50vh] bg-center bg-cover bg-no-repeat"
+        style={{ backgroundImage: 'url("/bgbanner005.jpg")' }}
+      >
+        <div className="absolute inset-0 bg-slate-900/40" aria-hidden="true"></div>
+        <div className="relative z-10 flex items-center justify-center h-full px-4">
+          <div className="text-center">
+            <h1 className="text-white text-5xl font-bold mb-6">
+              Your Best Resume, Done in Minutes with AI.
+            </h1>
+            <p className="text-white/90 mb-5 max-w-2xl mx-auto px-2">
+              From blank page to interview-ready, fast. Describe what you’ve done, and we’ll shape it into clear,
+              confident bullets. Your resume comes out crisp, consistent, and ready to share.
+            </p>
+            <ClearResumeButton
+              size="lg"
+              className="
+                text-lg px-8 py-6 mb-2 rounded-md
+                bg-black text-white
+                shadow-md hover:shadow-lg
+                hover:-translate-y-0.5 hover:scale-[1.01]
+                transition-transform duration-200
+                focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-black
+                gap-2
+              "
+            >
+              Get Started Now
+              <ArrowRight className="ml-1 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </ClearResumeButton>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      {/* Features Section */}
+      <section id="features" className="bg-white dark:bg-gray-800 pt-20 pb-10">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-20">
+            Why Choose Our AI Resume Builder?
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <FeatureCard
+              icon={<Sparkles className="w-12 h-12 text-blue-500" />}
+              title="AI-Powered Content"
+              description="Our AI generates tailored content based on your experience and the job you're applying for, making it very easy to use."
+            />
+            <FeatureCard
+              icon={<CheckCircle className="w-12 h-12 text-green-500" />}
+              title="Create Unlimited Resumes"
+              description="Build as many resumes as you need. Perfect for applying to multiple jobs or industries."
+            />
+            <FeatureCard
+              icon={<ArrowRight className="w-12 h-12 text-purple-500" />}
+              title="Easy Customization"
+              description="Easily customize your resume with our intuitive interface. It's so simple, anyone can create a professional resume in minutes."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Call-to-Action Section */}
+      <section className="bg-sky-600 dark:bg-sky-900 text-white py-20 mt-20">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6">
+            Download, Print, or Share Your Resume in Minutes
+          </h2>
+          <div className="flex justify-center space-x-8 mb-8">
+            <div className="flex flex-col items-center">
+              <Download className="w-12 h-12 mb-2" />
+              <span>Download</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Printer className="w-12 h-12 mb-2" />
+              <span>Print</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Share2 className="w-12 h-12 mb-2" />
+              <span>Share</span>
+            </div>
+          </div>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Join thousands of job seekers who have successfully landed their
+            dream jobs using our easy-to-use AI-powered resume builder.
+            Create unlimited resumes and choose how to use them!
+          </p>
+          
+          <ClearResumeButton
+            size="lg"
+            variant="secondary"
+            className="text-lg px-8 py-4 
+              hover:-translate-y-0.5 hover:scale-[1.01]
+              transition-transform duration-200
+              focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-black
+              gap-2"
+          >
+            Create Your Resume Now <ArrowRight className="ml-2" />
+          </ClearResumeButton> 
+        </div>
+      </section>
+    </div>
+  );
+}
+
+// Feature card component used in the features section
+function FeatureCard({ icon, title, description }) {
+  return (
+    <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md">
+      <div className="flex justify-center mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2 text-center">{title}</h3>
+      <p className="text-gray-600 dark:text-gray-300 text-center">
+        {description}
+      </p>
     </div>
   );
 }
