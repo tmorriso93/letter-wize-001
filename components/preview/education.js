@@ -4,7 +4,7 @@ import React from 'react'
 export default function Education({resume}) {
   return (
     <div className='my-6'>
-        <h2 className='font-bold text-sm mb-2' style={{color: resume.themeColor}}
+        <h2 className='font-bold text-sm mb-2 dark:text-slate-900' style={{color: resume.themeColor}}
         >
             Education
         </h2>
@@ -13,11 +13,11 @@ export default function Education({resume}) {
         {resume.education.map((edu, index) => {
             return (
                 <div key={index} className='my-5'>
-                    <h3 className='font-bold text-sm'>{edu.qualification}</h3>
+                    <h3 className='font-bold text-sm dark:text-slate-900'>{edu.qualification}</h3>
                     <div className='ml-2'>
-                        <p className='text-sm'>{edu.name}</p>
-                        <p className='text-xs text-gray-600'>{edu.address}</p>
-                        <p className='text-sm text-gray-600'>{edu.year}</p>
+                        <p className='text-sm dark:text-slate-900'>{edu.name}</p>
+                        <p className='text-xs text-gray-600 dark:text-slate-800'>{edu.address}</p>
+                        <p className='text-sm text-gray-600 dark:text-slate-800'>{edu.year}</p>
                     </div>
                 </div>
             )

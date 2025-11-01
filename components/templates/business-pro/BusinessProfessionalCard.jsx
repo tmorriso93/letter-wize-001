@@ -6,12 +6,15 @@ import { businessResumeFont } from "@/components/templates/fonts";
 // BusinessProfessionalCard component to display a professional resume layout
 export default function BusinessProfessionalCard({ resume }) {
   const theme = resume?.themeColor || "#1f3a5f";
+  const websiteDisplay = resume?.website
+    ? resume.website.replace(/^https?:\/\//i, "")
+    : "";
 
   return (
     <div
       className={`
         ${businessResumeFont.className} resume-list
-        bg-white text-black
+        bg-white text-black dark:bg-white dark:text-slate-900
         print:bg-white print:text-black
         print:overflow-visible print:rounded-none
       `}
@@ -32,16 +35,17 @@ export default function BusinessProfessionalCard({ resume }) {
               {resume?.name || "Your Name"}
             </h1>
             {resume?.job ? (
-              <div className="text-sm/5 opacity-90">
+              <div className="text-sm leading-5 font-medium text-white print:text-white">
                 {resume.job}
               </div>
             ) : null}
           </div>
 
           {/* RIGHT: Contact */}
-          <div className="text-sm/5 text-right opacity-95">
+          <div className="text-sm leading-5 text-right font-medium text-white print:text-white">
             <div>{resume?.phone}</div>
             <div>{resume?.email}</div>
+            {websiteDisplay ? <div>{websiteDisplay}</div> : null}
             <div className="truncate">{resume?.address}</div>
           </div>
         </div>
@@ -63,6 +67,7 @@ export default function BusinessProfessionalCard({ resume }) {
                 [&_ul]:list-disc [&_ul]:pl-5 [&_ul_li]:marker:text-sm
                 [&_li]:my-1
                 prose-headings:text-black prose-p:text-black prose-strong:text-black
+                dark:text-slate-900 dark:[&_p]:text-slate-900 dark:[&_li]:text-slate-900 dark:[&_strong]:text-slate-900
               "
               dangerouslySetInnerHTML={{
                 __html:
@@ -88,12 +93,12 @@ export default function BusinessProfessionalCard({ resume }) {
                 //   key={i}
                 //   className="inline-block px-2 py-1 text-base font-normal allow-break"
                 // >
-                <span key={i} className="text-[14px] leading-5 text-slate-800">
+                <span key={i} className="text-[14px] leading-5 text-slate-800 dark:text-slate-900">
                   {s?.name}
                 </span>
               ))}
               {(!resume?.skills || resume.skills.length === 0) && (
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-gray-500 dark:text-slate-800">
                   {/* default text */}
                 </span>
               )}
@@ -109,9 +114,9 @@ export default function BusinessProfessionalCard({ resume }) {
             <div className="space-y-5 allow-break text-left">
               {(resume?.experience ?? []).map((exp, idx) => (
                 <div key={idx} className="break-inside-avoid-page">
-                  <h3 className="text-sm font-bold">{exp?.title}</h3>
-                  <div className="text-sm">{exp?.company}</div>
-                  <div className="text-xs text-gray-600">
+                  <h3 className="text-sm font-bold dark:text-slate-900">{exp?.title}</h3>
+                  <div className="text-sm dark:text-slate-900">{exp?.company}</div>
+                  <div className="text-xs text-gray-600 dark:text-slate-800">
                     {exp?.address}
                     {exp?.startDate || exp?.endDate ? (
                       <>{" · "}{[exp?.startDate, exp?.endDate].filter(Boolean).join(" – ")}</>
@@ -125,6 +130,7 @@ export default function BusinessProfessionalCard({ resume }) {
                         [&_ul]:list-disc [&_ul]:pl-5 [&_ul_li]:marker:text-sm
                         [&_li]:my-1
                         prose-p:text-black
+                        dark:text-slate-900 dark:[&_p]:text-slate-900 dark:[&_li]:text-slate-900 dark:[&_strong]:text-slate-900
                       "
                       dangerouslySetInnerHTML={{ __html: exp.summary }}
                     />
@@ -132,7 +138,7 @@ export default function BusinessProfessionalCard({ resume }) {
                 </div>
               ))}
               {(resume?.experience ?? []).length === 0 && (
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-500 dark:text-slate-800">
                   {/* default text */}
                 </p>
               )}
@@ -148,15 +154,15 @@ export default function BusinessProfessionalCard({ resume }) {
             <div className="space-y-3 allow-break text-left">
               {(resume?.education ?? []).map((ed, i) => (
                 <div key={i} className="break-inside-avoid-page">
-                  <div className="text-sm font-semibold">{ed?.name}</div>
-                  <div className="text-sm">{ed?.qualification}</div>
-                  <div className="text-xs text-gray-700">
+                  <div className="text-sm font-semibold dark:text-slate-900">{ed?.name}</div>
+                  <div className="text-sm dark:text-slate-900">{ed?.qualification}</div>
+                  <div className="text-xs text-gray-700 dark:text-slate-800">
                     {[ed?.address, ed?.year].filter(Boolean).join(" · ")}
                   </div>
                 </div>
               ))}
               {(resume?.education ?? []).length === 0 && (
-                <p className="text-xs text-gray-700">
+                <p className="text-xs text-gray-700 dark:text-slate-800">
                   {/* default text */}
                 </p>
               )}
@@ -173,7 +179,7 @@ function SectionRow({ label, content, theme }) {
   return (
     <div className="flex items-start gap-4 allow-break">
       <div className="w-[20%] min-w-[140px] text-right pr-4">
-        <span className="text-[11px] font-semibold tracking-wider" style={{ color: theme }}>
+        <span className="text-[11px] font-semibold tracking-wider dark:text-slate-800 dark:!text-slate-800" style={{ color: theme }}>
           {label}
         </span>
       </div>

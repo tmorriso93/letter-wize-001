@@ -20,8 +20,10 @@ export default function StepOne() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const sanitizedValue =
+      name === "website" ? value.trim() : value;
     setResume((prevState) => {
-      const updatedResume = { ...prevState, [name]: value };
+      const updatedResume = { ...prevState, [name]: sanitizedValue };
       localStorage.setItem("resume", JSON.stringify(updatedResume));
       return updatedResume;
     });
@@ -81,6 +83,15 @@ export default function StepOne() {
         pattern="[0-9]*"
         maxLength={20}
         required
+      />
+      <Input
+        name="website"
+        className="mb-3"
+        onChange={handleChange}
+        value={resume.website || ""}
+        placeholder="Website (optional)"
+        type="text"
+        inputMode="url"
       />
       <Input
         name="email"

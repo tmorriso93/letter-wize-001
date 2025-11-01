@@ -12,6 +12,7 @@ const EMPTY_RESUME = {
   address: "",
   phone: "",
   email: "",
+  website: "",
   themeColor: "",
   experience: [{ title: '', company: '', address: '', startDate: '', endDate: '', summary: '' }],
   education: [{ name: "", address: "", qualification: "", year: "" }],
@@ -34,10 +35,14 @@ export default function StepOneCreate() {
   // Save to localStorage on every change
   const handleChange = e => {
     const { name, value } = e.target;
+    const sanitizedValue =
+      name === "phone"
+        ? value.replace(/\D/g, "")
+        : name === "website"
+        ? value.trim()
+        : value;
     setResume(prev => {
-      const sanitized =
-        name === "phone" ? value.replace(/\D/g, "") : value;
-      const updated = { ...prev, [name]: sanitized };
+      const updated = { ...prev, [name]: sanitizedValue };
       localStorage.setItem("resume", JSON.stringify(updated));
       return updated;
     });
@@ -97,6 +102,15 @@ export default function StepOneCreate() {
           maxLength={20}
           required
         />
+      <Input
+        name="website"
+        className='mb-3'
+        onChange={handleChange}
+        value={resume.website || ""}
+        placeholder='Website (optional)'
+        type="text"
+        inputMode="url"
+      />
       <Input name="email" className='mb-3' onChange={handleChange} value={resume.email} placeholder='Email' type="email" required />
       <div className='flex justify-end'>
         {!isSignedIn ? (

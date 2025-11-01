@@ -42,6 +42,7 @@ const createEmptyResume = () => ({
   job: "",
   address: "",
   phone: "",
+  website: "",
   email: "",
   themeColor: "",
   experience: [{ ...experienceField }],

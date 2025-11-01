@@ -19,6 +19,7 @@ export default function PreviewCard() {
       style={{ borderColor: resume?.themeColor }}
     >
       <Template resume={resume} />
+      
     </div>
   );
 }

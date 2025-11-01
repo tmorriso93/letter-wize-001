@@ -11,6 +11,7 @@ export default function PersonalDetails({ resume = {} }) {
     photo = "",
     phone = "",
     email = "",
+    website = "",
     themeColor = "#000",
   } = resume;
 
@@ -24,7 +25,7 @@ export default function PersonalDetails({ resume = {} }) {
             >
                 {resume.name}
             </h2>
-            <h2 className='text-center text-sm font-medium capitalize'>{resume.job}</h2>
+            <h2 className='text-center text-sm font-medium capitalize dark:text-slate-900'>{resume.job}</h2>
             {/* <h2 className='text-center text-sm font-medium'>{resume.address}</h2> */}
 
             {/* <div className='flex  items-center justify-center gap-10  my-2 '>
@@ -34,13 +35,13 @@ export default function PersonalDetails({ resume = {} }) {
                 <h2 className='text-center text-sm font-medium capitalize'>{resume.address}</h2>
             </div> */}
 
-            <div className="flex w-full items-center my-2 gap-4">
-              {/* find out what where this photo is from */}
-            {/* <h2 className="flex-1 text-center text-xs font-normal truncate">{resume.photo}</h2> */}
-            <h2 className="flex-1 text-center text-xs font-normal truncate">{resume.email}</h2>
-            <h2 className="flex-1 text-center text-xs font-normal truncate">{resume.phone}</h2>
-            <h2 className="flex-1 text-center text-sm font-medium capitalize truncate">{resume.address}</h2>
-          </div>
+            <div className="flex w-full flex-wrap items-center justify-center my-2 gap-3 text-xs font-normal text-slate-600 dark:text-slate-800">
+              {[email, phone, website && website.replace(/^https?:\/\//i, ""), address].filter(Boolean).map((item, index) => (
+                <span key={index} className="truncate text-center max-w-[70%] sm:max-w-[45%]">
+                  {item}
+                </span>
+              ))}
+            </div>
 
             <hr 
                 className='border-[1.5px] my-2' 

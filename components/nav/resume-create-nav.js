@@ -20,6 +20,7 @@ export default function ResumeCreateNav({ allowed = true }) {
     
     // Render navigation buttons for each step
   return (
+    
   <nav className="flex justify-center w-full py-4">
     {/* step indicators */}
     <div className='flex space-x-4'>

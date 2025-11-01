@@ -22,7 +22,7 @@ export default function TopNav() {
         // <nav className="flex justify-between py-2 mx-2 shadow-sm rounded-b-sm px-2 top-nav">
         <nav className="flex justify-between py-0 md:mx-2 max-sm:mx-0 shadow-sm rounded-b-sm px-2 top-nav">
         <Link href="/">
-            <div className="flex text-sky-900 items-center gap-2 font-bold text-lg uppercase">
+            <div className="flex text-sky-900 dark:text-[#16416c] items-center gap-2 font-bold text-lg uppercase">
             <Image 
                 
                 width={50}
@@ -37,7 +37,7 @@ export default function TopNav() {
            
         </Link>
            <div className="flex justify-end items-center max-sm:gap-1 sm:gap-4
-                          text-md max-sm:text-xs font-medium  text-slate-700">
+                          text-md max-sm:text-xs font-medium  text-slate-700 dark:text-[#16416c] ">
             
              <Link href="/" className="mx-2">Home</Link>
             {isSignedIn && (

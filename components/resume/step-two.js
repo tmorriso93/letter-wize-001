@@ -72,6 +72,7 @@ export default function StepTwo() {
           job: resume.job,
           address: resume.address,
           phone: resume.phone,
+          website: resume.website,
           email: resume.email,
           step: 2,
         };
@@ -142,42 +143,67 @@ export default function StepTwo() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full py-2 px-5 shadow-lg border-t-4 rounded-lg">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold mb-5">Design & Summary</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="w-full space-y-6 rounded-2xl border border-slate-200/70 bg-white/95 p-6 shadow-xl dark:border-white/10 dark:bg-white/5 mt-6 lg:mt-4"
+    >
+      <div className="flex flex-col gap-2">
+        <h2 className="text-2xl font-bold tracking-tight">Design & Summary</h2>
+        <p className="text-sm text-slate-600 dark:text-slate-300">
+          Pick a template, fine-tune your color, and polish your professional summary before moving on.
+        </p>
       </div>
 
       {/* -------- Template Selector -------- */}
-      <div className="mb-5">
-        <label className="block text-sm font-medium mb-2">Template</label>
-        <div className="flex flex-wrap gap-4">
-          {Object.entries(TEMPLATE_META).map(([key, meta]) => (
-            <label key={key} className="inline-flex items-center gap-2">
-              <input
-                type="radio"
-                name="template"
-                value={key}
-                checked={(resume.template || defaultTemplateKey) === key}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setResume((prev) => {
-                    const updated = { ...prev, template: value };
-                    localStorage.setItem("resume", JSON.stringify(updated));
-                    return updated;
-                  });
-                  persistResumeUpdates({ template: value });
-                }}
-              />
-              <span className="text-sm">{meta.label}</span>
-            </label>
-          ))}
+      <div className="space-y-3">
+        <span className="block text-sm font-medium text-slate-700 dark:text-slate-200">Template</span>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {Object.entries(TEMPLATE_META).map(([key, meta]) => {
+            const isSelected = (resume.template || defaultTemplateKey) === key;
+            return (
+              <label
+                key={key}
+                className={`group flex cursor-pointer items-start gap-3 rounded-lg border p-4 transition
+                  ${isSelected ? "border-primary/60 bg-primary/5 shadow-md ring-2 ring-primary/20" : "border-slate-200/70 bg-white/80 hover:border-primary/50 dark:border-white/10 dark:bg-white/5"}
+                `}
+              >
+                <input
+                  type="radio"
+                  name="template"
+                  value={key}
+                  className="sr-only"
+                  checked={isSelected}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setResume((prev) => {
+                      const updated = { ...prev, template: value };
+                      localStorage.setItem("resume", JSON.stringify(updated));
+                      return updated;
+                    });
+                    persistResumeUpdates({ template: value });
+                  }}
+                />
+                <div
+                  className={`mt-1 h-2.5 w-2.5 rounded-full border transition
+                    ${isSelected ? "border-primary bg-primary" : "border-slate-300 bg-white dark:border-white/30 dark:bg-white/10"}
+                  `}
+                />
+                <div>
+                  <div className="text-sm font-medium text-slate-800 dark:text-slate-100">{meta.label}</div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Polished layout styled for easy reading.
+                  </p>
+                </div>
+              </label>
+            );
+          })}
         </div>
       </div>
 
       {/* -------- Theme Color + Live Swatch -------- */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium mb-2">Theme Color</label>
-        <div className="flex items-center gap-4">
+      <div className="space-y-3">
+        <span className="block text-sm font-medium text-slate-700 dark:text-slate-200">Theme color</span>
+        <div className="flex flex-col gap-6 rounded-xl border border-slate-200/70 bg-white/70 p-4 shadow-sm dark:border-white/10 dark:bg-white/5 md:flex-row md:items-center md:justify-between">
           <HexColorPicker
             color={resume.themeColor || "#1f3a5f"}
             onChange={(themeColor) => {
@@ -195,16 +221,32 @@ export default function StepTwo() {
               }, 250);
             }}
           />
-          <div
-            className="h-10 w-10 rounded-full border"
-            style={{ backgroundColor: resume.themeColor || "#1f3a5f" }}
-            title="Current theme color"
-          />
+          <div className="flex items-center gap-4">
+            <div
+              className="h-12 w-12 rounded-full border border-slate-200 shadow-inner dark:border-white/10"
+              style={{ backgroundColor: resume.themeColor || "#1f3a5f" }}
+              title="Current theme color"
+            />
+            <div className="space-y-1">
+              <span className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400 mr-1">
+                Selected
+              </span>
+              <span className="font-mono text-sm text-slate-800 dark:text-slate-100">
+                {(resume.themeColor || "#1f3a5f").toUpperCase()}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* -------- Summary Editor -------- */}
-      <div className="mb-6">
+      <div className="space-y-3">
+        <div className="flex flex-col gap-1">
+          <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Professional summary</span>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Share a concise highlight reel of your experience. You can write manually or let AI give you a starting point.
+          </p>
+        </div>
         <ReactQuill
           theme="snow"
           onChange={(html) =>
@@ -216,20 +258,20 @@ export default function StepTwo() {
           }
           value={resume.summary || ""}
           placeholder="Write a summary highlighting accomplishments and strengths or add a few key words and click the Generate with AI button"
-          className="summary-quill"
+          className="summary-quill rounded-xl bg-white/80 shadow-sm dark:bg-white/10"
         />
       </div>
 
       {/* -------- Actions -------- */}
-      <div className="flex justify-evenly">
+      <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
 
         <Button
           type="button"
           variant="destructive"
-          className="hover:-translate-y-0.5 hover:scale-[1.01]
+          className="w-full hover:-translate-y-0.5 hover:scale-[1.01]
             transition-transform duration-200
             focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-black
-            gap-2"
+            gap-2 sm:w-auto"
           onClick={handleGenerateWithAi}
           disabled={loading}
         >
@@ -243,10 +285,10 @@ export default function StepTwo() {
 
         <Button
           type="submit"
-          className="hover:-translate-y-0.5 hover:scale-[1.01]
+          className="w-full hover:-translate-y-0.5 hover:scale-[1.01]
             transition-transform duration-200
             focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-black
-            gap-2"
+            gap-2 sm:w-auto"
         >
           Next
         </Button>

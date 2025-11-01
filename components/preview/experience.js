@@ -22,11 +22,11 @@ export default function Experience({ resume }) {
 
         {resume?.experience.map((exp, index) => {
             return <div key={index} className="my-5">
-                <h2 className="text-sm font-bold">{exp?.title}</h2>
-                <h3 className="text-sm">{exp?.company}</h3>
+                <h2 className="text-sm font-bold dark:text-slate-900">{exp?.title}</h2>
+                <h3 className="text-sm dark:text-slate-900">{exp?.company}</h3>
                 <div className="flex justify-between items-center">
-                <p className="text-sm italic text-gray-600">{exp?.startDate} - {exp?.endDate || "Present"}</p>
-                <p className="text-xs text-gray-600">{exp?.address}</p>
+                <p className="text-sm italic text-gray-600 dark:text-slate-800">{exp?.startDate} - {exp?.endDate || "Present"}</p>
+                <p className="text-xs text-gray-600 dark:text-slate-800">{exp?.address}</p>
                 </div>
                 
 
@@ -35,7 +35,7 @@ export default function Experience({ resume }) {
                         readOnly={true}
                         value={exp.summary}
                         theme="bubble"
-                        className="text-sm font-normal"
+                        className="text-sm font-normal dark:text-slate-900"
                     />
                 )}
             </div>;

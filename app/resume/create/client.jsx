@@ -78,7 +78,7 @@ export default function ResumeCreateClient({ allowed = false }) {
         <PreviewCard />
       </div>
 
-      <div className="flex flex-col lg:w-1/2 p-4 lg:order-first lg:justify-center lg:items-start">
+      <div className="flex flex-col gap-6 lg:w-1/2 p-4 lg:order-first lg:items-start lg:justify-start lg:max-h-screen lg:overflow-y-auto">
         <ResumeCreateNav allowed={allowed} />
         {step === 1 && <StepOneCreate />}
         {step === 2 && <StepTwo />}

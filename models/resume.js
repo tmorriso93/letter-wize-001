@@ -42,6 +42,7 @@ const ResumeSchema = new mongoose.Schema(
     job: String,
     address: String,
     phone: String,
+    website: String,
     email: String,
     themeColor: String,
     summary: String,
